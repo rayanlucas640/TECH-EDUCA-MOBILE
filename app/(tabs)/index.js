@@ -1,9 +1,13 @@
-import{
-  View, // Para agrupar elementos (=div)
-  Text, // Para exibir textos(= p, h1...)
-  TouchableOpacity, // Para botões clicáveis (=button)
-  ScrollView, // Para a área principal com scroll
+import {
+  ScrollView,
   StyleSheet // Para aplicar estilo na página
+  ,
+ 
+ 
+ 
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native'; // Importa os componentes View e Text do React Native
  
 export default function Index() { // Define e exporta o componente principal da tela
@@ -12,40 +16,38 @@ export default function Index() { // Define e exporta o componente principal da 
       {/* ======= TOPO (HEADER) ======= */}
       {/* ======= Área de cabeçalho com logo e menu ========= */}
       <View style={styles.topo}>
-        {/* ======= Logo do sistema ========= */}
+        {/* Logo do sistema  */}
         <Text style={styles.logo}>TechEduca</Text>
      
-        {/* ======= Menu de navegação ========= */}
+        {/*  Menu de navegação  */}
       <View style={styles.menu}>
         <Text style={[styles.menuItem, styles.ativo]}> Início </Text>  {/* ======= Item ativo ========= */}
         <Text style={styles.menuItem}> Sobre </Text>
         <Text style={styles.menuItem}> Contato </Text>
-
+       
      
-        {/* ======= Botão de login ========= */}
+        {/* Botão de login */}
     <TouchableOpacity style={styles.btnLogin}>
-        <Text style={styles.textoBotao}>Login</Text>
+      <Text style={styles.textoBotao}>Login</Text>
     </TouchableOpacity>
  
       </View>
     </View>
  
     {/* ======= HERO ======= */}
-    {/* ======= Seção principal (banner inicial) ========= */}
+    {/*  Seção principal (banner inicial)  */}
     <View style={styles.hero}>
-    <View style={styles.heroContent}>
+      <View style={styles.heroContent}>
       <Text style={styles.heroTitulo}>
-        {/* ======= Título principal ========= */}
+        {/* Título principal*/}
         Formação em Tecnologia para o mercado real
-        </Text>
-
-        {/* DESCRIÇÃO */}
-      <Text>
+      </Text>
+        {/* Descrição */}
+      <Text style={styles.descricao}>
         Aprenda desenvolvimento web, lógica e banco de dados
       </Text>
- 
-      <Text style={styles.avisoLogin}>
         {/* ======= Aviso sobre login ========= */}
+      <Text style={styles.avisoLogin}>
         Para visualizar os cursos, é necessário fazer Login
       </Text>
  
@@ -57,51 +59,55 @@ export default function Index() { // Define e exporta o componente principal da 
       <TouchableOpacity style={styles.btnSecundario}>
       <Text>Fale Conosco</Text>
       </TouchableOpacity>
-    </View>
+ 
+      </View>
     </View>
  
-    {/* DESTAQUES */}
-    {/* ======= Seção com benefícios de plataforma ========= */}
+    {/* ====== DESTAQUES =======*/}
+    {/* Seção com benefícios de plataforma */}
     <View style={styles.destaques}>
-    <View style={styles.container}>
-      {/* ======= Título da seção ========= */}
-      <Text>Por que estudar na TechEduca?</Text>
+     <View style={styles.container}>
+      {/* Título da seção */}
+      <Text style={styles.tituloDestaque}>Por que estudar na TechEduca?</Text>
  
-      {/* ======= Lista dos cards ========= */}
+      <View style={styles.cards}>
  
-      {/* ======= Card 1 ========= */}
-    <View>
-      <Text>Projetos Reais</Text>
-      <Text>
+      {/* Lista dos cards */}
+ 
+      {/* Card 1 */}
+    <View style={styles.card}>
+      <Text style ={styles.cardTitulo}>Projetos Reais</Text>
+      <Text style={styles.cardDescricao}>
         Você desenvolve sites com base em situações profissionais
       </Text>
     </View>
-      {/* ======= Card 2 ========= */}
-    <View>
-      <Text>Materiais Didáticos</Text>
-      <Text>
+      {/* Card 2 */}
+    <View style={styles.card}>
+      <Text style ={styles.cardTitulo}>Materiais Didáticos</Text>
+      <Text style={styles.cardDescricao}>
         Conteúdos e exercícios práticos
       </Text>
     </View>
-      {/* ======= Card 3 ========= */}
-    <View>
-      <Text>Suporte do Instrutor</Text>
-      <Text>
+      {/* Card 3 */}
+    <View style={styles.card}>
+      <Text style ={styles.cardTitulo}>Suporte do Instrutor</Text>
+      <Text style={styles.cardDescricao}>
         Acompanhamento durante todo o processo
       </Text>
     </View>
-    </View>
  
-    {/* ======= Rodapé ========= */}
+    {/* RODAPÉ */}
+    {/* ======= Parte final da página ========= */}
     {/* Parte final da página */}
-    <View>
-      {/* Textos de direitos autorais */}
-      <Text> 2026 TechEduca. Todos os Direitos Reservados</Text>
-
+    <View style={styles.rodape}>
+      {/* Texto de direitos autorais */}
+      <Text style={styles.textoRodape}> 2026 TechEduca. Todos os Direitos Reservados</Text>
       {/* Links de contato */}
-      <Text>Entre em contato</Text>
+      <Text style={styles.linkRodape}>Entre em contato</Text>
     </View>
- 
+   
+    </View>
+    </View>
     </View>
     </ScrollView>
   );
@@ -113,6 +119,7 @@ const styles = StyleSheet.create(
       backgroundColor: '#1a4db3',
       padding:20,
       alignItems: 'center',
+      gap: 10,
     },
  
     logo : {
@@ -129,11 +136,11 @@ const styles = StyleSheet.create(
  
     menuItem: {
       color: '#ffffff',
-      fontWeight: 'bold',
+      fontWeight: 'bold'
     },
  
     ativo: {
-      color: '#ff6a00',
+      color: '#ff6a00'
     },
  
     btnLogin: {
@@ -142,17 +149,17 @@ const styles = StyleSheet.create(
       paddingHorizontal: 20,
       paddingVertical: 10,
       borderRadius: 8,
-      marginTop: 10,
+      marginTop: 10
     },
    
     hero: {
       backgroundColor: '#ffffff',
       textAlign: 'center',
-      padding: 30,
+      padding: 30
     },
  
     heroContent: {
-      alignItems: 'center',
+      alignItems: 'center'
     },
  
     heroTitulo: {
@@ -160,7 +167,7 @@ const styles = StyleSheet.create(
       color: '#1a4db3',
       fontWeight: 'bold',
       textAlign: 'center',
-      marginBottom: 10,
+      marginBottom: 10
     },
  
     avisoLogin: {
@@ -168,7 +175,7 @@ const styles = StyleSheet.create(
       color: '#222',
       textAlign: 'center',
       marginTop: 10,
-      marginBottom: 20,
+      marginBottom: 20
     },
  
     btnPrimario: {
@@ -178,7 +185,7 @@ const styles = StyleSheet.create(
       paddingVertical: 20,
       borderRadius: 8,
       textDecorationLine: 'none',
-      marginTop: 10,
+      marginTop: 10
     },
  
     btnSecundario: {
@@ -190,76 +197,85 @@ const styles = StyleSheet.create(
       borderColor: '#1a4db3',
       borderWidth: 2,
       textDecorationLine: 'none',
-      marginTop: 10,
+      marginTop: 10
     },
-
+ 
     textoBotao: {
       color: '#ffffff',
       fontWeight: 'bold',
       textAlign: 'center'
     },
-
+ 
     descricao: {
       color: '#222',
       fontSize: 28,
       textAlign: 'center',
       lineHeight: 25,
-      marginBottom: 10,
+      marginBottom: 10
     },
-
+ 
     destaques: {
-      padding: 20,
+      padding: 20
     },
-
+ 
     container: {
-      padding: 20,
+      padding: 20
     },
-
+ 
     cards: {
-      marginTop: 20,
+      marginTop: 20
     },
-
+ 
     card: {
       backgroundColor: '#ffffff',
       padding: 20,
       borderRadius: 8,
-      marginBottom: 20,
-      boxShadow: '#ffffff' 
+      marginBottom: 10,
+      elevation: 3,
+      boxShadow: '#222'
     },
  
-      cardTitulo: {
-        color: '1a4db3',
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: 8,
-      },
-      
-      cardDescricao: {
-        color: '#222',
-        fontSize: 15,
-        textAlign: 'center',
-        lineHeight: 22,
-      },
-
-      rodape: {
-        backgroundColor: '#1a4db3',
-        padding: 20,
-        alignItems: 'center',
-      },
-
-      textoRodape: {
-        color: '#ffffff',
-        textAlign: 'center',
-        marginBottom: 8,
-      },
-
-      linkRodape: {
-        color: '#ff6a00',
-        fontWeight: 'bold',
-        textDecorationLine: 'none',
-      }
-
-
+    cardTitulo: {
+      color: '#1a4db3',
+      fontSize: 18,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginBottom: 8
+    },
+ 
+    cardDescricao: {
+      color: '#222',
+      fontSize: 15,
+      textAlign: 'center',
+      lineHeight: 22
+    },
+ 
+    rodape: {
+      backgroundColor: '#1a4db3',
+      padding: 20,
+      textAlign: 'center'
+    },
+ 
+    textoRodape: {
+      color: '#ffffff',
+      textAlign: 'center',
+      marginBottom: 8
+    },
+ 
+    linkRodape: {
+      color: '#ff6a00',
+      fontWeight: 'bold',
+      textDecorationLine: 'none'
+    },
+ 
+    tituloDestaque: {
+      color: '#1a4db3',
+      fontSize: 24,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginBottom: 20
+    },
+   
   }
 )
+ 
