@@ -1,4 +1,3 @@
-	
 // Carrega as variáveis de ambiente ANTES de qualquer outra coisa
 require("dotenv").config();
 const express = require("express"); // Framework principal
@@ -10,9 +9,23 @@ const conexao = require("./db.js"); // Pool de conexões MySQL
 // Cria a instância do servidor Express
 const app = express();
 
+// Lista de origens permitidas para acessar a API
+    const listOrigins = [
+        "http://localhost:8081", // Expo no computador
+        "http://localhost:5501", // Live Server do VS Code
+        "http://127.0.0.1:5501", // Variação do Live Server
+        "https://rayanlucas640.github.io" // Deploy no GitHub Pages
+    ];
+    app.use(cors({
+        origin: listOrigins, // Só aceita requisições dessas origens
+        credentials: true, // Permite envio de cookies de sessão
+        methods: ["GET","POST","PUT","DELETE","OPTIONS"], // Métodos HTTP permitidos
+        allowedHeaders: ["Content-Type","Authorization"] // Cabeçalhos aceitos
+    }));
+
 // Configurações da API
-app.use(cors()); //Libera o acesso a API de outras origens
 app.use(express.json()); // Habilita leitura de dados JSON no corpo das requisições
+app.use(express.urlencoded({ extended: true }));
 
 
 // Configuração do objeto sessão
@@ -41,35 +54,23 @@ if(process.env.NODE_ENV==="production"){
 
 app.use(session(sessionConfig)); // Aplica a configuração de sessão (CORRIGIDO)
 
-// Lista de origens permitidas para acessar a API
-    const listOrigins = [
-        "http://localhost:8081", // Expo no computador
-        "http://localhost:5501", // Live Server do VS Code
-        "http://127.0.0.1:5501", // Variação do Live Server
-        "https://rayanlucas640.github.io" // Deploy no GitHub Pages
-    ];
-    app.use(cors({
-        origin: listOrigins, // Só aceita requisições dessas origens
-        credentials: true, // Permite envio de cookies de sessão
-        methods: ["GET","POST","PUT","DELETE","OPTIONS"], // Métodos HTTP permitidos
-        allowedHeaders: ["Content-Type","Authorization"] // Cabeçalhos aceitos
-    }));
+
 
 // Primeira Rota (PRINCIPAL)
 app.get("/",(req,res)=>{
     // O primeiro parametro é o caminho, o segundo é a função de callback
     // req - objeto com os dados da requisição (vem do servidor)
     // res - objeto para enviar a resposta (vai para o user/site/app)
-    res.send("API TechEduca Mobile funcionando");
+    res.send("API TechEduca Mobile funcionando"); 
 });
 
 // Rota de Cadastro
 app.post("/cadastro", async (req,res) => {
-    try{
+    try{ 
         // 1 - Extrai os campos enviados no corpo da requisição (JSON)
         const{nome,email,senha} = req.body
         console.log(req.body);
-       
+        
         // 2 - Verifica se algum campo obrigatório está vazio
         if(!nome || !email || !senha){
             return res.status(400).json({erro: "Preencha todos os campos"})
@@ -85,8 +86,7 @@ app.post("/cadastro", async (req,res) => {
         };
 
         // 4 - Criptografa a senha (10 = fator de custo hash)
-        const senhaHash =
-         bcrypt.hash(senha,10);
+        const senhaHash = await bcrypt.hash(senha,10);
 
         // 5 - Insere um novo usuário no banco com senha criptografada
 
@@ -94,8 +94,8 @@ app.post("/cadastro", async (req,res) => {
                     (nome,email,senha)
                     VALUES(?,?,?)`
         conexao.execute(sql,[nome,email,senhaHash])
-        res.json({mensagem: "Usuário cadastrado com sucesso"});
-       
+        res.json({mensagem: "Usuário cadastrado com sucesso"}); 
+        
     } catch(erro){
         console.log(erro);
         res.status(500).json({erro: "Erro ao cadastrar usuário!"})
@@ -105,8 +105,8 @@ app.post("/cadastro", async (req,res) => {
 // Rota de Login
 app.post("/login",async (req,res)=>{
     try{
-        const {email,senha} = req.body
-       
+        const {email,senha} = req.body || {};
+        
         if(!email || !senha){
             return res.status(400).json({erro: "Preencha todos os campos"})
         }
@@ -116,26 +116,28 @@ app.post("/login",async (req,res)=>{
 
         const [resultado] = await conexao.execute(sql,[email])
 
+        
         if(resultado.length === 0){
             return res.status(401).json({mensagem: "Usuário ou senha inválidos!"})
         }
 
         const usuario = resultado[0]    
             // pega o primeiro e único resultado do SQL
-       
-        const senhaCorreta = await bcrypt.compare(senha,usuario.senha)
+        
+        const senhaCorreta = await bcrypt.compare(senha,usuario.senha) 
             //compara a senha que usuário informou com a senha criptograda do banco
 
-       
+        
         if(!senhaCorreta){
             // senha hash for diferente da senha digitada
             return res.status(401).json({erro: "Senha inválida"});
             // 401 - acesso não autorizado
         };
-   
+    
         res.json({mensagem: "Login realizado com sucesso!"});
-   
+    
     } catch(erro){
+        console.log("Erro no Login: ",erro)
         res.status(500).json({erro: "Erro ao cadastrar usuário"})
     }
 })
@@ -151,6 +153,7 @@ app.post("/contato",async (req,res)=>{
 
         const sql = `INSERT INTO tb_mensagem(nome,email,mensagem)
                     VALUES(?,?,?)`
+                    
         await conexao.execute(sql,[nome,email,mensagem])
         res.json({mensagem: "Mensagem enviada com sucesso!"});
 

@@ -1,15 +1,15 @@
+import { Link } from 'expo-router';
+import { useState } from 'react';
 import {
-    View, // Para agrupar elementos (= div)
-    Text, // Para exibir textos (= p, h1...)
-    TouchableOpacity, // Para botões clicáveis (= button)
-    ScrollView, // Para a área principal com scroll,
-    StyleSheet, // Para aplicar estilo na página
-    TextInput
-   } from 'react-native'; // Importa os componentes View e Text
-   import {Link} from 'expo-router';
-  import { useState } from 'react';
+  ScrollView, // Para a área principal com scroll,
+  StyleSheet, // Para agrupar elementos (= div)
+  Text, // Para aplicar estilo na página
+  TextInput, // Para exibir textos (= p, h1...)
+  TouchableOpacity,
+  View
+} from 'react-native'; // Importa os componentes View e Text
 
- const API_URL = "http://localhost:3000"
+ const API_URL = "https://techeduca-1-lqns.onrender.com"
 
   export default function Contato() {
    const[nome, setNome] = useState('');
