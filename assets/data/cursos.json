@@ -1,0 +1,45 @@
+[
+
+    {
+        "id": "1",
+        "titulo": "Desenvolvimento WEB",
+        "img": "desweb.jpg",
+        "url": "/curso1",
+        "descricao": "Aprenda HTML, CSS, Javascript e práticas modernas de desenvolvimento",
+        "ch": 40,
+        "objetivo": "Desenvolver páginas web modernas, responsiva e organizadas",
+        "publico": "Indicado para estudantes iniciantes que desejam aprender desenvolvimento web.",
+        "conteudo": "HTML, CSS, JavaScript, responsividade, organização de arquivos e boas práticas.",
+        "modalidade": "Presencial com práticas em laboratório.",
+        "nivel": "Iniciante"
+      },
+
+      {
+        "id": "2",
+        "titulo": "Informática Básica",
+        "img": "info.jpg",
+        "url": "/curso2",
+        "descricao": "Domine o uso do computador e aplicativos essenciais",
+        "ch": 30,
+        "objetivo": "Desenvolver páginas web modernas, responsiva e organizadas",
+        "publico": "Capacitar o aluno para utilizar o computador de forma segura, produtiva e organizada.",
+        "conteudo": "Windows, internet, e-mail, organização de arquivos, Word, Excel e PowerPoint básico.",
+        "modalidade": "Presencial",
+        "nivel": "Básico"
+      },
+      
+      {
+        "id": "3",
+        "titulo": "Desenvolvimento de Games",
+        "img": "desgame.webp",
+        "url": "/curso3",
+        "descricao": "Aprenda a desenvolver games de forma legal e criativa",
+        "ch": 80,
+        "objetivo": "Introduzir conceitos de criação de jogos, lógica de programação e desenvolvimento interativo.",
+        "publico": "Indicado para estudantes interessados em games, programação e criatividade digital.",
+        "conteudo": "Lógica de jogos, personagens, cenários, interatividade, mecânicas básicas e publicação de protótipos.",
+        "modalidade": "Presencial com atividades práticas",
+        "nivel": "Intermediário"
+      }
+
+]
